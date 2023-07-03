@@ -46,7 +46,7 @@ export default function Home() {
         <input className="inline-input"
         type="number" 
         value= {inputDistance}
-        style={inputStyle}
+        style={{...inputStyle, width: "50px"}}
         onChange = {(e) => setDistance(Math.max(0, e.target.value))} 
         />
         miles

@@ -7,6 +7,7 @@ export default function Navbar() {
             <li>
                 <a href="/home">Home</a>
                 <a href="/trips">Trips</a>
+                <a href="/maps">Maps</a>
             </li>
         </ul>
     </nav>

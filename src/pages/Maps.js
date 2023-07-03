@@ -6,6 +6,8 @@ import {
   LoadScript,
   DirectionsService,
   DirectionsRenderer,
+  Autocomplete,
+  Marker
 } from '@react-google-maps/api';
 
 const containerStyle = {
@@ -13,16 +15,26 @@ const containerStyle = {
   height: '400px',
 };
 
-const center = {
-  lat: 37.7749, // Default center latitude
-  lng: -122.4194, // Default center longitude
-};
 
-const DistanceCalculator = () => {
+
+export default function Maps() {
+  const center = {
+    lat: 37.7749, // Default center latitude
+    lng: -122.4194, // Default center longitude
+  };
+
+  const markerPositions = [
+    { lat: 37.7749, lng: -122.4194 }, // Marker 1
+    { lat: 37.772, lng: -122.41 }, // Marker 2
+    { lat: 37.775, lng: -122.415 }, // Marker 3
+  ];
+
   const [origin, setOrigin] = useState('');
   const [destination, setDestination] = useState('');
   const [travelMode, setTravelMode] = useState('DRIVING');
   const [response, setResponse] = useState(null);
+
+  
 
   const travelModes = ['DRIVING', 'WALKING', 'BICYCLING', 'TRANSIT'];
 
@@ -47,18 +59,40 @@ const DistanceCalculator = () => {
 
   return (
     <div>
-      <input
-        type="text"
-        placeholder="From"
-        value={origin}
-        onChange={(e) => setOrigin(e.target.value)}
-      />
-      <input
-        type="text"
-        placeholder="To"
-        value={destination}
-        onChange={(e) => setDestination(e.target.value)}
-      />
+        <div>
+      <Autocomplete
+        onLoad={(autocomplete) => {
+          autocomplete.setFields(['formatted_address']);
+          autocomplete.addListener('place_changed', () => {
+            const place = autocomplete.getPlace();
+            setOrigin(place.formatted_address);
+          });
+        }}
+      >
+        <input
+          type="text"
+          placeholder="From"
+          value={origin}
+          onChange={(e) => setOrigin(e.target.value)}
+        />
+      </Autocomplete>
+      <Autocomplete
+        onLoad={(autocomplete) => {
+          autocomplete.setFields(['formatted_address']);
+          autocomplete.addListener('place_changed', () => {
+            const place = autocomplete.getPlace();
+            setDestination(place.formatted_address);
+          });
+        }}
+      >
+        <input
+          type="text"
+          placeholder="To"
+          value={destination}
+          onChange={(e) => setDestination(e.target.value)}
+        />
+      </Autocomplete>
+      </div>
       <select value={travelMode} onChange={(e) => setTravelMode(e.target.value)}>
         {travelModes.map((mode) => (
           <option key={mode} value={mode}>
@@ -73,13 +107,14 @@ const DistanceCalculator = () => {
           <p className="info">Duration: {response.routes[0].legs[0].duration.text}</p>
         </div>
       )}
-      <LoadScript googleMapsApiKey="AIzaSyDTvHngaL3RXhdy2VAlHxq5dA0Nnh-MFcs">
+
         <GoogleMap mapContainerClassName="map-container" center={center} zoom={10}>
+         {markerPositions.map((position, index) => (
+          <Marker key={index} position={position} />
+        ))}
+
           {response && <DirectionsRenderer directions={response} />}
         </GoogleMap>
-      </LoadScript>
     </div>
   );
-};
-
-export default DistanceCalculator;
+}
