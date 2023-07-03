@@ -68,9 +68,9 @@ const DistanceCalculator = () => {
       </select>
       <button onClick={calculateDistance}>Calculate Distance</button>
       {response && (
-        <div>
-          <p>Distance: {response.routes[0].legs[0].distance.text}</p>
-          <p>Duration: {response.routes[0].legs[0].duration.text}</p>
+        <div className="row">
+          <p className="info">Distance: {response.routes[0].legs[0].distance.text}</p>
+          <p className="info">Duration: {response.routes[0].legs[0].duration.text}</p>
         </div>
       )}
       <LoadScript googleMapsApiKey="AIzaSyDTvHngaL3RXhdy2VAlHxq5dA0Nnh-MFcs">
