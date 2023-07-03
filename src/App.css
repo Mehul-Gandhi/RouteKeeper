@@ -36,3 +36,128 @@
     transform: rotate(360deg);
   }
 }
+/* * {
+  box-sizing: border-box;
+} */
+
+body {
+  margin: 0;
+}
+
+/* Navbar container */
+.nav {
+  background-color: green;
+  color: #fff;
+  padding: 10px;
+}
+
+/* Navbar list */
+.nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+/* Navbar list items */
+.nav li {
+  margin-right: 10px;
+}
+
+/* Navbar links */
+.nav a {
+  color: #fff;
+  text-decoration: none;
+  padding: 5px;
+}
+
+/* Hover effect */
+.nav a:hover {
+  background-color: #555;
+}
+
+.row {
+  display: "flex";
+  flex-direction: row;
+}
+
+.inline-text,
+.inline-input {
+  display: inline-block;
+  margin: 0;
+  vertical-align: middle;
+  margin-top: 10px;
+  margin-right: 20px;
+  /* align-items: center; */
+}
+
+/* .inline-input input {
+  margin-left: 20px; /* Adjust the margin as needed */
+/* }  */
+
+.container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap; /* Prevent wrapping to multiple rows */
+  align-items: center;
+  justify-content: center;
+  overflow-x: auto; /* Enable horizontal scrolling if content overflows */
+}
+
+/* justify-content */
+.box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content:space-between; 
+  border: 1px solid black;
+  background-image: linear-gradient(white , grey);
+  color: black;
+  margin: 5px;
+  padding: 30px;
+  width: 200px; /* Adjust width as needed */
+  height: 500px;
+}
+
+.box img {
+  max-width: 70%;
+  max-height: 70%;
+  margin: 10px;
+  border: 2px solid black;
+}
+
+.info {
+  margin: 5px;
+  display: inline-block;
+  padding: 5px 10px;
+  border: 2px solid darkgreen;
+  background-image: linear-gradient(to bottom, lightgreen, rgb(10, 243, 10));
+  border-radius: 0%;
+  color: darkgreen;
+  font-family: "Arial", sans-serif; /* Replace with your desired font family */
+  font-size: 20px;
+  
+}
+
+.convert-info {
+  margin: 5px;
+  display: inline-block;
+  padding: 5px 10px;
+  color: darkgreen;
+  font-family: "Arial", sans-serif; /* Replace with your desired font family */
+  font-size: 20px;
+}
+
+.transp {
+  display: flex;
+  flex-direction: column;
+  border: solid 2px black;
+  align-items: center;
+  min-height: 300px;
+  min-width: 200px;
+  max-height: 300px;
+  background-color: darkgrey;
+  justify-content: center;
+}
