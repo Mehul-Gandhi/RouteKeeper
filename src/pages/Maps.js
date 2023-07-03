@@ -8,10 +8,10 @@ import {
   DirectionsRenderer,
 } from '@react-google-maps/api';
 
-// const containerStyle = {
-//   width: '400px',
-//   height: '400px',
-// };
+const containerStyle = {
+  width: '400px',
+  height: '400px',
+};
 
 const center = {
   lat: 37.7749, // Default center latitude
@@ -74,7 +74,7 @@ const DistanceCalculator = () => {
         </div>
       )}
       <LoadScript googleMapsApiKey="AIzaSyDTvHngaL3RXhdy2VAlHxq5dA0Nnh-MFcs">
-        <GoogleMap mapContainerStyle="map-container" center={center} zoom={10}>
+        <GoogleMap mapContainerClassName="map-container" center={center} zoom={10}>
           {response && <DirectionsRenderer directions={response} />}
         </GoogleMap>
       </LoadScript>
