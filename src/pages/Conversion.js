@@ -46,6 +46,11 @@ export default function Conversion() {
             </div>
           </div>
         ));
+        // Move the last entry to the first position
+    if (newDivs.length > 1) {
+    const lastEntry = newDivs.pop();
+    newDivs.unshift(lastEntry);
+    }
       } else {
         tempDiv = modes.map(({ mode, img, speed }) => ({
           mode,
@@ -68,6 +73,10 @@ export default function Conversion() {
             </h1>
           </div>
         ));
+        if (newDivs.length > 1) {
+          const lastEntry = newDivs.pop();
+          newDivs.unshift(lastEntry);
+          }
       }
       const index = tempDiv.findIndex((mode) => mode.mode === selectedOption);
       [newDivs[0], newDivs[index]] = [newDivs[index], newDivs[0]];
