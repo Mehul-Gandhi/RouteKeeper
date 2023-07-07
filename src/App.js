@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import Conversion from './pages/Conversion';
 import React  from "react";
 import Maps from './pages/Maps';
+import Trips from "./pages/Trips";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/conversion" element={<Conversion />} />
         <Route path="/maps" element={<Maps />} />
+        <Route path="/trips" element={<Trips />} />
         <Route path="*" element={<h1>PAGE NOT FOUND</h1>} />
     </Routes>
   </Router>

@@ -161,3 +161,82 @@ body {
   background-color: darkgrey;
   justify-content: center;
 }
+
+/* trips.css */
+
+.container2 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.trip-card {
+  width: 300px;
+  height: 300px;
+  margin: 20px;
+  padding: 20px;
+  background-color: #f7f7f7;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.trip-card:hover {
+  transform: scale(1.05);
+}
+
+.trip-card h2 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.trip-card p {
+  font-size: 16px;
+  color: #777;
+  margin-bottom: 20px;
+}
+
+.trip-card .timestamp {
+  font-size: 14px;
+  color: #999;
+}
+
+.trip-card .distance {
+  font-size: 18px;
+  font-weight: bold;
+  color: #555;
+}
+.trip-list {
+  list-style: none;
+}
+
+.trip-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  padding: 0;
+}
+
+.trip-card {
+  flex: 0 0 calc(33.33% - 20px); /* Adjust the width of each card as needed */
+  margin: 10px;
+  list-style: none;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+.trip-entry {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.trip-mode,
+.trip-distance,
+.trip-timestamp {
+  margin-bottom: 10px;
+}
+
+/* Add more custom styling here based on your preferences */

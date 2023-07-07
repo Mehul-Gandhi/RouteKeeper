@@ -13,6 +13,7 @@ export default function Conversion() {
   const { hours, minutes, selectedOption, miles, method } = location.state;
 
   const [divs, setDivs] = useState([]);
+  const [prevTrips, setTrips] = useState([]);
 
   useEffect(() => {
     const convert = (hours, minutes, method, selectedOption, miles) => {
@@ -26,47 +27,46 @@ export default function Conversion() {
 
       let newDivs;
       let tempDiv;
-    //   hours = Math.round(hours);
-      console.log(hours);
-    //   minutes = Math.round(minutes);
 
       if (method === "Time -> Distance") {
         hours = ((hours /1) + (minutes / 60));
         tempDiv = modes.map(({ mode, img, speed }) => ({
-            mode,
-            img,
-            speed: (hours * speed).toFixed(2)
-          })).sort((a, b) => a.speed - b.speed);          
+          mode,
+          img,
+          speed: (hours * speed).toFixed(2)
+        })).sort((a, b) => a.speed - b.speed);          
 
         newDivs = tempDiv.map(({ mode, img, speed }) => (
           <div key={mode} className="box">
             <img src={img} alt={mode} />
             <div className="transp">
-            <h1>{mode}</h1>
-            <h1>{(speed / 1).toFixed(2) + " miles"} </h1>
+              <h1>{mode}</h1>
+              <h1>{(speed / 1).toFixed(2) + " miles"} </h1>
+              <button onClick={() => storeTrip(mode, (speed / 1).toFixed(2) + " miles")}>Submit</button>
             </div>
           </div>
         ));
-
       } else {
         tempDiv = modes.map(({ mode, img, speed }) => ({
-            mode,
-            img,
-            minutes: Math.floor(((miles / speed) * 60))
-          })).sort((a, b) => a.minutes - b.minutes);   
+          mode,
+          img,
+          minutes: Math.floor(((miles / speed) * 60))
+        })).sort((a, b) => a.minutes - b.minutes);   
         newDivs = tempDiv.map(({ mode, img, minutes }) => (
           <div key={mode} className="box">
             <img src={img} alt={mode} />
             <h1>{mode}</h1>
+            <button onClick={() => storeTrip(mode, 0)}>Submit</button>
             <h1>
-  {Math.abs(minutes) > 60 ? (
-    <span>
-    {Math.floor(Math.abs(minutes) / 60)} hour<span>{(Math.floor(Math.abs(minutes) / 60) > 1) && "s"}</span> and {(Math.abs(minutes) % 60)} minutes
-    </span>
-  ) : (
-    <span>{minutes} minutes</span>
-  )}
-</h1>          </div>
+              {Math.abs(minutes) > 60 ? (
+                <span>
+                  {Math.floor(Math.abs(minutes) / 60)} hour<span>{(Math.floor(Math.abs(minutes) / 60) > 1) && "s"}</span> and {(Math.abs(minutes) % 60)} minutes
+                </span>
+              ) : (
+                <span>{minutes} minutes</span>
+              )}
+            </h1>
+          </div>
         ));
       }
       const index = tempDiv.findIndex((mode) => mode.mode === selectedOption);
@@ -77,6 +77,27 @@ export default function Conversion() {
 
     convert(hours, minutes, method, selectedOption, miles);
   }, [hours, minutes, selectedOption, method, miles]);
+
+  const storeTrip = (mode, distance) => {
+    const trip = {
+      mode,
+      distance,
+      timestamp: new Date().toISOString()
+    };
+  
+    const storedTrips = sessionStorage.getItem("prevTrips");
+    const prevTrips = storedTrips ? JSON.parse(storedTrips) : [];
+    const updatedTrips = [...prevTrips, trip];
+  
+    sessionStorage.setItem("prevTrips", JSON.stringify(updatedTrips));
+    setTrips(updatedTrips);
+  };
+
+
+
+  // useEffect(() => {
+  //   sessionStorage.setItem("prevTrips", JSON.stringify(prevTrips));
+  // }, [prevTrips]);
 
   const renderDivs = () => {
     if (divs.length === 0) {
@@ -89,8 +110,8 @@ export default function Conversion() {
   return (
     <div>
       <div className="info">Mode: {method}</div>
-    {miles && <span className="info">{miles} miles </span>}
-    {hours && minutes && <span className="info">{hours} hours and {minutes} minutes</span>}
+      {miles && <span className="info">{miles} miles </span>}
+      {hours && minutes && <span className="info">{hours} hours and {minutes} minutes</span>}
       {renderDivs()}
     </div>
   );
